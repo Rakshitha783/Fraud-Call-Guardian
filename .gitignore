@@ -1,0 +1,39 @@
+# Node
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Python virtual environments
+venv/
+.venv/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+
+# AI model files
+*.pt
+*.pth
+*.onnx
+
+# Private datasets
+datasets/private/
