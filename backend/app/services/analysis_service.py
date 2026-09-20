@@ -1,6 +1,7 @@
 from app.schemas.analysis import AnalyzeRequest, AnalyzeResponse
 from app.ai.keyword_detector import detect_keywords
 from app.ai.risk_engine import calculate_risk, get_risk_level
+from app.ai.scam_classifier import classify_scam
 
 
 def analyze_transcript(data: AnalyzeRequest) -> AnalyzeResponse:
@@ -16,13 +17,8 @@ def analyze_transcript(data: AnalyzeRequest) -> AnalyzeResponse:
     # Determine risk level
     risk_level = get_risk_level(risk_score)
 
-    # Basic category detection
-    if "OTP request" in indicators or "Bank impersonation" in indicators:
-        scam_category = "BANKING_SCAM"
-    elif "Payment request" in indicators:
-        scam_category = "PAYMENT_SCAM"
-    else:
-        scam_category = "UNKNOWN"
+    # Classify scam category 
+    scam_category = classify_scam(transcript)
 
     # Basic confidence for our baseline system
     confidence = min(risk_score / 100, 0.99)
